@@ -30,7 +30,7 @@ cp prometheus promtool /usr/local/bin/
  chown -R prometheus: /etc/prometheus /var/lib/prometheus
  chown prometheus: /usr/local/bin/{prometheus,promtool}
  ```
-- для автоматического запуска prometheus сделаем унит systemd и запустим его ```nano /etc/systemd/system/prometheus.service```
+- для автоматического запуска prometheus сделаем юнит systemd и запустим его ```nano /etc/systemd/system/prometheus.service```
 - заполняем юнит
 ```
 [Unit]
@@ -52,4 +52,9 @@ ExecReload=/bin/kill -HUP $MAINPID
 [Install]
 WantedBy=multi-user.target
 ```
-
+- перечитываем конфишурацию systemd юнитов ```systemctl daemon-reload```
+- запускаем юнит и разрешаем его автозапуск 
+```
+systemctl start prometheus
+systemctl enable prometheus
+```
